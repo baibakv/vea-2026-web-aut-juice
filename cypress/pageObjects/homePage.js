@@ -61,4 +61,12 @@ export class HomePage extends BasePage {
     return cy.get('#submitButton');
   }
 
+  static get addToBasketButton() {
+  return cy.get('[aria-label="Add to Basket"]');
+}
+
+static get basketButton() {
+  return cy.get('[aria-label="Show the shopping cart"]');
+}
+
 }

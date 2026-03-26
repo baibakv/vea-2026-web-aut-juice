@@ -1,6 +1,12 @@
 import { HomePage } from '../pageObjects/HomePage';
 import { LoginPage } from '../pageObjects/loginPage';
 import { RegistrationPage } from '../pageObjects/registrationPage';
+import { BasketPage } from '../pageObjects/basketPage';
+import { DeliveryMethodPage } from '../pageObjects/deliveryMethodPage';
+import { OrderCompletionPage } from '../pageObjects/orderCompletionPage';
+import { OrderSummaryPage } from '../pageObjects/orderSummaryPage';
+import { PaymentOptionsPage } from '../pageObjects/paymentOptionsPage';
+import { SelectAddressPage } from '../pageObjects/selectAddressPage';
 
 describe('Juice-shop scenarios', () => {
   context('Without auto login', () => {
@@ -152,7 +158,7 @@ describe('Juice-shop scenarios', () => {
   });
 
     // Create scenario - Add a review
-    it.only('Add a review', () => {
+    it('Add a review', () => {
       // Click on search icon
       HomePage.searchIcon.click();
       // Search for Raspberry
@@ -185,28 +191,40 @@ describe('Juice-shop scenarios', () => {
     });
 
     // Create scenario - Buy Girlie T-shirt
-    it('Read a review', () => {
+    it.only('Read a review', () => {
       // Click on search icon
       HomePage.searchIcon.click();
       // Search for Girlie
       HomePage.searchField.type('Girlie{enter}');
       // Add to basket "Girlie"
+      HomePage.addToBasketButton.click()
       // Click on "Your Basket" button
+      HomePage.basketButton.click();
       // Create page object - BasketPage
       // Click on "Checkout" button
+      BasketPage.checkoutButton.click();
       // Create page object - SelectAddressPage
       // Select address containing "United Fakedom"
+      SelectAddressPage.selectAddress('United Fakedom');
       // Click Continue button
+      SelectAddressPage.continueButton.click();
       // Create page object - DeliveryMethodPage
       // Select delivery speed Standard Delivery
+      DeliveryMethodPage.standardDelivery.click();
       // Click Continue button
+      DeliveryMethodPage.continueButton.click();
       // Create page object - PaymentOptionsPage
       // Select card that ends with "5678"
+      PaymentOptionsPage.selectCard('5678');
       // Click Continue button
+      PaymentOptionsPage.continueButton.click();
       // Create page object - OrderSummaryPage
       // Click on "Place your order and pay"
+      OrderSummaryPage.placeOrderButton.click();
       // Create page object - OrderCompletionPage
       // Validate confirmation - "Thank you for your purchase!"
+      OrderCompletionPage.confirmationMessage.should('contain.text', 
+        'Thank you for your purchase!');
     });
 
     // Create scenario - Add address
