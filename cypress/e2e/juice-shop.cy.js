@@ -151,16 +151,29 @@ describe('Juice-shop scenarios', () => {
       HomePage.reviewText.should('contain.text', 'K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!');
   });
 
-  // Create scenario - Add a review
-  it('Read a review', () => {
-    // Click on search icon
-    // Search for Raspberry
-    // Select a product card - Raspberry Juice (1000ml)
-    // Type in review - "Tastes like metal"
-    // Click Submit
-    // Click expand reviews button/icon (wait for reviews to appear)
-    // Validate review -  "Tastes like metal"
-  });
+    // Create scenario - Add a review
+    it.only('Add a review', () => {
+      // Click on search icon
+      HomePage.searchIcon.click();
+      // Search for Raspberry
+      HomePage.searchField.type('Raspberry{enter}');
+      // Select a product card - Raspberry Juice (1000ml)
+      HomePage.productNames.contains('Raspberry Juice (1000ml)').click();
+      // Wait for dialog to open
+      cy.get('mat-dialog-container').should('be.visible');
+      // Type in review - "Tastes like metal"
+      HomePage.reviewField.clear().type('Tastes like metal', { force: true });
+      // Click Submit
+      HomePage.submitReviewButton.click();
+      // Wait for submit to complete
+      cy.wait(1000);
+      // Click expand reviews button/icon (wait for reviews to appear)
+      HomePage.expandReviewsButton.click();
+      // Wait for reviews to appear
+      cy.get('.review-text p').should('be.visible');
+      // Validate review - "Tastes like metal"
+      HomePage.reviewText.should('contain.text', 'Tastes like metal');
+    });
 
     // Create scenario - Validate product card amount
     it('Read a review', () => {
@@ -174,7 +187,9 @@ describe('Juice-shop scenarios', () => {
     // Create scenario - Buy Girlie T-shirt
     it('Read a review', () => {
       // Click on search icon
+      HomePage.searchIcon.click();
       // Search for Girlie
+      HomePage.searchField.type('Girlie{enter}');
       // Add to basket "Girlie"
       // Click on "Your Basket" button
       // Create page object - BasketPage
