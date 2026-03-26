@@ -62,11 +62,19 @@ export class HomePage extends BasePage {
   }
 
   static get addToBasketButton() {
-  return cy.get('[aria-label="Add to Basket"]');
-}
+    return cy.get('[aria-label="Add to Basket"]');
+  }
 
-static get basketButton() {
-  return cy.get('[aria-label="Show the shopping cart"]');
-}
+  static get basketButton() {
+    return cy.get('[aria-label="Show the shopping cart"]');
+  }
+
+  static get ordersAndPaymentButton() {
+    return cy.get('[aria-label="Show Orders and Payment Menu"]');
+  }
+
+  static get savedAddressesButton() {
+    return cy.get('[aria-label="Go to saved address page"]');
+  }
 
 }

@@ -7,6 +7,8 @@ import { OrderCompletionPage } from '../pageObjects/orderCompletionPage';
 import { OrderSummaryPage } from '../pageObjects/orderSummaryPage';
 import { PaymentOptionsPage } from '../pageObjects/paymentOptionsPage';
 import { SelectAddressPage } from '../pageObjects/selectAddressPage';
+import { SavedAddressPage } from '../pageObjects/savedAddressPage';
+import { CreateAddressPage } from '../pageObjects/createAddressPage';
 
 describe('Juice-shop scenarios', () => {
   context('Without auto login', () => {
@@ -191,7 +193,7 @@ describe('Juice-shop scenarios', () => {
     });
 
     // Create scenario - Buy Girlie T-shirt
-    it.only('Read a review', () => {
+    it('Buy Girlie T-shirt', () => {
       // Click on search icon
       HomePage.searchIcon.click();
       // Search for Girlie
@@ -227,21 +229,36 @@ describe('Juice-shop scenarios', () => {
         'Thank you for your purchase!');
     });
 
-    // Create scenario - Add address
-    it('Read a review', () => {
+    it.only('Add address', () => {
       // Click on Account
+      HomePage.accountButton.click();
+      // Wait for menu to open
+      cy.get('[aria-label="Show Orders and Payment Menu"]').should('be.visible');
       // Click on Orders & Payment
+      cy.get('[aria-label="Show Orders and Payment Menu"]:visible').click();
       // Click on My saved addresses
+      cy.get('[aria-label="Go to saved address page"]').click({ force: true });
+      cy.get('.cdk-overlay-backdrop').should('not.exist');
       // Create page object - SavedAddressesPage
       // Click on Add New Address
+      SavedAddressPage.addNewAddressButton.click({ force: true });
       // Create page object - CreateAddressPage
       // Fill in the necessary information
+      CreateAddressPage.countryField.type('Latvia');
+      CreateAddressPage.nameField.type('Baiba');
+      CreateAddressPage.mobileField.type('23456789');
+      CreateAddressPage.zipCodeField.type('LV-1234');
+      CreateAddressPage.addressField.type('Street street 123');
+      CreateAddressPage.cityField.type('Grobina');
+      CreateAddressPage.stateField.type('Dienvidkurzeme');
       // Click Submit button
+      CreateAddressPage.submitButton.click();
       // Validate that previously added address is visible
+      SavedAddressPage.addressList.should('contain.text', 'Test Street 1');
     });
 
     // Create scenario - Add payment option
-    it('Read a review', () => {
+    it('Add payment option', () => {
       // Click on Account
       // Click on Orders & Payment
       // Click on My payment options
