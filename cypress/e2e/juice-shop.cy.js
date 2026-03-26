@@ -102,7 +102,7 @@ describe('Juice-shop scenarios', () => {
 
 
     // Create scenario - Search 500ml and validate cards
-    it.only('Search 500ml and validate cards', () => {
+    it('Search 500ml and validate cards', () => {
       // Click on search icon
       HomePage.searchIcon.click()
       // Search for 500ml
@@ -134,14 +134,25 @@ describe('Juice-shop scenarios', () => {
       );
     });
 
-    // Create scenario - Read a review
-    // Click on search icon
-    // Search for King
-    // Select a product card - OWASP Juice Shop "King of the Hill" Facemask
-    // Click expand reviews button/icon (wait for reviews to appear)
-    // Validate review - K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!
+    it('Read a review', () => {
+      // Click on search icon
+      HomePage.searchIcon.click();
+      // Search for King
+      HomePage.searchField.type('King{enter}');
+      // Select a product card - OWASP Juice Shop "King of the Hill" Facemask
+      HomePage.productNames.contains('OWASP Juice Shop "King of the Hill" Facemask').click();
+      // Wait for dialog to open
+      cy.get('mat-dialog-container').should('be.visible');
+      // Click expand reviews button/icon (wait for reviews to appear)
+      HomePage.expandReviewsButton.click();
+      // Wait for reviews to appear
+      cy.get('.review-text p').should('be.visible');
+      // Validate review - K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!
+      HomePage.reviewText.should('contain.text', 'K33p5 y0ur ju1cy 5plu773r 70 y0ur53lf!');
+  });
 
-    // Create scenario - Add a review
+  // Create scenario - Add a review
+  it('Read a review', () => {
     // Click on search icon
     // Search for Raspberry
     // Select a product card - Raspberry Juice (1000ml)
@@ -149,57 +160,66 @@ describe('Juice-shop scenarios', () => {
     // Click Submit
     // Click expand reviews button/icon (wait for reviews to appear)
     // Validate review -  "Tastes like metal"
+  });
 
     // Create scenario - Validate product card amount
-    // Validate that the default amount of cards is 12
-    // Change items per page (at the bottom of page) to 24
-    // Validate that the amount of cards is 24
-    // Change items per page (at the bottom of page) to 36
-    // Validate that the amount of cards is 35
+    it('Read a review', () => {
+      // Validate that the default amount of cards is 12
+      // Change items per page (at the bottom of page) to 24
+      // Validate that the amount of cards is 24
+      // Change items per page (at the bottom of page) to 36
+      // Validate that the amount of cards is 35
+    });
 
     // Create scenario - Buy Girlie T-shirt
-    // Click on search icon
-    // Search for Girlie
-    // Add to basket "Girlie"
-    // Click on "Your Basket" button
-    // Create page object - BasketPage
-    // Click on "Checkout" button
-    // Create page object - SelectAddressPage
-    // Select address containing "United Fakedom"
-    // Click Continue button
-    // Create page object - DeliveryMethodPage
-    // Select delivery speed Standard Delivery
-    // Click Continue button
-    // Create page object - PaymentOptionsPage
-    // Select card that ends with "5678"
-    // Click Continue button
-    // Create page object - OrderSummaryPage
-    // Click on "Place your order and pay"
-    // Create page object - OrderCompletionPage
-    // Validate confirmation - "Thank you for your purchase!"
+    it('Read a review', () => {
+      // Click on search icon
+      // Search for Girlie
+      // Add to basket "Girlie"
+      // Click on "Your Basket" button
+      // Create page object - BasketPage
+      // Click on "Checkout" button
+      // Create page object - SelectAddressPage
+      // Select address containing "United Fakedom"
+      // Click Continue button
+      // Create page object - DeliveryMethodPage
+      // Select delivery speed Standard Delivery
+      // Click Continue button
+      // Create page object - PaymentOptionsPage
+      // Select card that ends with "5678"
+      // Click Continue button
+      // Create page object - OrderSummaryPage
+      // Click on "Place your order and pay"
+      // Create page object - OrderCompletionPage
+      // Validate confirmation - "Thank you for your purchase!"
+    });
 
     // Create scenario - Add address
-    // Click on Account
-    // Click on Orders & Payment
-    // Click on My saved addresses
-    // Create page object - SavedAddressesPage
-    // Click on Add New Address
-    // Create page object - CreateAddressPage
-    // Fill in the necessary information
-    // Click Submit button
-    // Validate that previously added address is visible
+    it('Read a review', () => {
+      // Click on Account
+      // Click on Orders & Payment
+      // Click on My saved addresses
+      // Create page object - SavedAddressesPage
+      // Click on Add New Address
+      // Create page object - CreateAddressPage
+      // Fill in the necessary information
+      // Click Submit button
+      // Validate that previously added address is visible
+    });
 
     // Create scenario - Add payment option
-    // Click on Account
-    // Click on Orders & Payment
-    // Click on My payment options
-    // Create page object - SavedPaymentMethodsPage
-    // Click Add new card
-    // Fill in Name
-    // Fill in Card Number
-    // Set expiry month to 7
-    // Set expiry year to 2090
-    // Click Submit button
-    // Validate that the card shows up in the list
+    it('Read a review', () => {
+      // Click on Account
+      // Click on Orders & Payment
+      // Click on My payment options
+      // Create page object - SavedPaymentMethodsPage
+      // Click Add new card
+      // Fill in Name
+      // Fill in Card Number
+      // Set expiry month to 7
+      // Set expiry year to 2090
+      // Click Submit button
+      // Validate that the card shows up in the list
+    });
   });
 });
