@@ -185,12 +185,20 @@ describe('Juice-shop scenarios', () => {
     });
 
     // Create scenario - Validate product card amount
-    it.only('Read a review', () => {
+    it.only('Validate product card amount', () => {
+      HomePage.productCards.should('be.visible');
       // Validate that the default amount of cards is 12
+      HomePage.productCards.should('have.length', 12);
       // Change items per page (at the bottom of page) to 24
+      HomePage.itemsPerPageSelect.click();
+      cy.get('mat-option').contains('24').click();
       // Validate that the amount of cards is 24
+      HomePage.productCards.should('have.length', 24);
       // Change items per page (at the bottom of page) to 36
-      // Validate that the amount of cards is 35
+      HomePage.itemsPerPageSelect.click();
+      cy.get('mat-option').contains('36').click();
+      // Validate that the amount of cards is 36
+      HomePage.productCards.should('have.length', 36);
     });
 
     // Create scenario - Buy Girlie T-shirt
@@ -233,12 +241,11 @@ describe('Juice-shop scenarios', () => {
     it('Add address', () => {
       // Click on Account
       HomePage.accountButton.click();
-      // Wait for menu to open
-      cy.get('[aria-label="Show Orders and Payment Menu"]').should('be.visible');
       // Click on Orders & Payment
-      cy.get('[aria-label="Show Orders and Payment Menu"]:visible').click();
+      HomePage.ordersAndPaymentButton.should('be.visible');
+      HomePage.ordersAndPaymentButton.click();
       // Click on My saved addresses
-      cy.get('[aria-label="Go to saved address page"]').click({ force: true });
+      HomePage.savedAddressesButton.click({ force: true });
       cy.get('.cdk-overlay-backdrop').should('not.exist');
       // Create page object - SavedAddressesPage
       // Click on Add New Address
@@ -255,7 +262,7 @@ describe('Juice-shop scenarios', () => {
       // Click Submit button
       CreateAddressPage.submitButton.click();
       // Validate that previously added address is visible
-      SavedAddressPage.addressList.should('contain.text', 'Test Street 1');
+      SavedAddressPage.addressList.should('contain.text', 'Street street 123');
     });
 
     // Create scenario - Add payment option
@@ -263,15 +270,15 @@ describe('Juice-shop scenarios', () => {
       // Click on Account
       HomePage.accountButton.click();
       // Click on Orders & Payment
-      cy.get('[aria-label="Show Orders and Payment Menu"]:visible').click();
+      HomePage.ordersAndPaymentButton.click();
       // Click on My payment options
-      cy.get('[aria-label="Go to saved payment methods page"]').click({ force: true });
+      HomePage.savedPaymentMethodsButton.click({ force: true });
       cy.get('.cdk-overlay-backdrop').should('not.exist');
       // Create page object - SavedPaymentMethodsPage
       // Click Add new card
       SavedPaymentMethodsPage.addNewCardButton.click();
       // Fill in Name
-      SavedPaymentMethodsPage.nameField.type('Test User');
+      SavedPaymentMethodsPage.nameField.type('Baiba');
       // Fill in Card Number
       SavedPaymentMethodsPage.cardNumberField.type('1234567812345678');
       // Set expiry month to 7
@@ -282,7 +289,6 @@ describe('Juice-shop scenarios', () => {
       SavedPaymentMethodsPage.submitButton.click();
       // Validate that the card shows up in the list
       SavedPaymentMethodsPage.cardList.should('contain.text', '5678');
-    });
-    
+    });    
   });
 });

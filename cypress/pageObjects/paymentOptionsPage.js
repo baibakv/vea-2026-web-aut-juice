@@ -5,7 +5,7 @@ export class PaymentOptionsPage extends BasePage {
         cy.contains('mat-row', lastFourDigits).find('mat-radio-button').click();
     }
 
-  static get continueButton() {
-    return cy.get('[aria-label="Proceed to review"]');
-  }
+    static get continueButton() {
+        return cy.get('[aria-label="Proceed to review"]');
+    }
 }

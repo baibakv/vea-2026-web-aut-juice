@@ -34,8 +34,8 @@ export class HomePage extends BasePage {
   }
 
   static get productNames() {
-  return cy.get('.item-name');
-}
+    return cy.get('.item-name');
+  } 
 
   static get productBoxInfo(){
     return cy.get('mat-dialog-content .details-row');
@@ -46,8 +46,8 @@ export class HomePage extends BasePage {
   }
 
   static get expandReviewsButton() {
-  return cy.get('mat-expansion-panel-header');
-}
+    return cy.get('mat-expansion-panel-header');
+  }
 
   static get reviewText() {
     return cy.get('.review-text p');
@@ -75,6 +75,34 @@ export class HomePage extends BasePage {
 
   static get savedAddressesButton() {
     return cy.get('[aria-label="Go to saved address page"]');
+  }
+
+  static get productCards() {
+    return cy.get('mat-grid-tile');
+  }
+
+  static get itemsPerPageSelect() {
+    return cy.get('[aria-label="Items per page:"]');
+  }
+
+  static get productCards() {
+    return cy.get('mat-grid-tile');
+  } 
+
+  static get itemsPerPageSelect() {
+    return cy.get('mat-paginator mat-select');
+  }
+
+  static get ordersAndPaymentButton() {
+    return cy.get('[aria-label="Show Orders and Payment Menu"]:visible');
+  }
+
+  static get savedAddressesButton() {
+    return cy.get('[aria-label="Go to saved address page"]');
+  }
+
+  static get savedPaymentMethodsButton() {
+    return cy.get('[aria-label="Go to saved payment methods page"]');
   }
 
 }
